@@ -39,7 +39,7 @@ TaskSync API is a backend service that acts as a central hub for task management
 - **User activity analytics** and usage patterns
 - **API request logging** and rate limiting
 
-## 🏗️ **Architecture Overview**
+## **Architecture Overview**
 
 TaskSync API follows a modular Django architecture with clear separation of concerns:
 
@@ -60,7 +60,7 @@ tasksync-api/
 
 ### **Completed Components**
 
-#### **Authentication System (100% Complete)**
+#### **Authentication System**
 - [x] Custom User model with sync preferences
 - [x] OAuth2 state management with PKCE security
 - [x] External account management (Google, Notion, Todoist)
@@ -69,29 +69,29 @@ tasksync-api/
 - [x] Email verification and account security
 - [x] Session tracking and security monitoring
 
-#### **Database Design (100% Complete)**
+#### **Database Design**
 - [x] User management with notification preferences
 - [x] External account connections with encrypted tokens
 - [x] OAuth2 state management for secure flows
 - [x] Session tracking for security analytics
 - [x] Comprehensive indexing strategy for performance
 
-#### **Security Framework (100% Complete)**
+#### **Security Framework**
 - [x] OAuth2 with PKCE implementation ready
 - [x] Token encryption for sensitive data
 - [x] Account lockout and failed login protection
 - [x] CSRF protection with state parameters
 - [x] Permission system design
 
-### 🔄 **In Progress**
+### **In Progress**
 
-#### **API Endpoints (40% Complete)**
+#### **API Endpoints**
 - [ ] Authentication views and URL routing (IN PROGRESS)
 - [ ] OAuth2 service implementation (IN PROGRESS)
-- [ ] External account management endpoints
-- [ ] User profile and preferences APIs
+- [ ] External account management endpoints (IN PROGRESS)
+- [ ] User profile and preferences APIs (IN PROGRESS)
 
-### 📋 **Planned Development**
+### **Planned Development**
 
 #### **Task Management System**
 - [ ] Task, Project, and Label models
