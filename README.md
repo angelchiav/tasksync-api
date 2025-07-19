@@ -39,7 +39,7 @@ TaskSync API is a backend service that acts as a central hub for task management
 - **User activity analytics** and usage patterns
 - **API request logging** and rate limiting
 
-## 🏗️ **Architecture Overview**
+## **Architecture Overview**
 
 TaskSync API follows a modular Django architecture with clear separation of concerns:
 
@@ -83,15 +83,15 @@ tasksync-api/
 - [x] CSRF protection with state parameters
 - [x] Permission system design
 
-### 🔄 **In Progress**
+### **In Progress**
 
-#### **API Endpoints (40% Complete)**
+#### **API Endpoints**
 - [ ] Authentication views and URL routing (IN PROGRESS)
 - [ ] OAuth2 service implementation (IN PROGRESS)
-- [ ] External account management endpoints
-- [ ] User profile and preferences APIs
+- [ ] External account management endpoints (IN PROGRESS)
+- [ ] User profile and preferences APIs (IN PROGRESS)
 
-### 📋 **Planned Development**
+### **Planned Development**
 
 #### **Task Management System**
 - [ ] Task, Project, and Label models
