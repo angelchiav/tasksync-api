@@ -7,7 +7,7 @@ A powerful Django REST API that synchronizes tasks across multiple productivity 
 TaskSync API is a backend service that acts as a central hub for task management across different platforms. Instead of managing tasks in multiple disconnected apps, TaskSync keeps everything synchronized bidirectionally with intelligent conflict resolution.
 
 
-## **Key Features**
+## **Key Features (Working on it..)**
 
 ### **Multi-Platform Sync**
 - **Google Tasks** integration with full OAuth2 flow
