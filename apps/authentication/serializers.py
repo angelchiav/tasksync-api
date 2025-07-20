@@ -213,3 +213,69 @@ class UserPasswordChangeSerializer(serializers.Serializer):
         user.set_password(self.validated_data['new_password'])
         user.save()
         return user
+    
+class OAuthUrlSerializer(serializers.Serializer):
+    """
+    Serializer for generating OAuth authorization URLs
+    """
+    provider = serializers.ChoiceField(choices=ExternalAccount.PROVIDER_CHOICES)
+    redirect_uri = serializers.URLField()
+
+    def validate_provider(self, value):
+        """Validate provider configuration exists"""
+        if value not in settings.OAUTH2_PROVIDERS:
+            raise serializers.ValidationError(f"Provider '{value}' is not configured")
+        return value
+    
+    def validate_redirect_uri(self, value):
+        """Redirect URI is allowed"""
+        allowed_uris = getattr(settings, 'ALLOWED_OAUTH_REDIRECT_URIS', [])
+        if allowed_uris and value not in allowed_uris:
+            raise serializers.ValidationError("Redirect URI not allowed")
+        return value
+    
+class OAuthCallbackSerializer(serializers.Serializer):
+    """
+    Serializer for handling OAuth2 callbacks
+    """
+    provider = serializers.ChoiceField(choices=ExternalAccount.PROVIDER_CHOICES)
+    code = serializers.CharField()
+    state = serializers.CharField()
+    error = serializers.CharField(required=False)
+    error_description = serializers.CharField(required=False)
+    
+    def validate(self, attrs):
+        """Validate OAuth callbacks parameters"""
+        if attrs.get('error'):
+            error_msg = attrs.get('error_description', attrs['error'])
+            raise serializers.ValidationError({"OAuth error": {error_msg}})
+        
+        if not attrs.get('code'):
+            raise serializers.ValidationError("Authorization code is required")
+        
+        return attrs
+    
+class OAuthStateSerializer(serializers.ModelSerializer):
+    """
+    OAuth state serializer for debugging (development only) ELIMINAR PARA PRODUCCIÓN
+    """
+    is_expired = serializers.SerializerMethodField()
+    is_valid = serializers.SerializerMethodField()
+
+    class Meta:
+        model = OAuthState
+        fields = [
+            'id', 'state', 'user', 'provider', 'redirect_uri',
+            'scopes', 'expires_at', 'is_used', 'is_expired',
+            'is_valid', 'user_agent', 'ip_address', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+
+    def get_is_expired(self, obj):
+        """If OAuth state is expired"""
+        return obj.is_expired()
+    
+    def get_is_valid(self, obj):
+        """If OAuth state is valid to use"""
+        return obj.is_valid()
+    
